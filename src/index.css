@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+@plugin 'tailwind-scrollbar' {
+  nocompatible: true;
+  preferredStrategy: 'pseudoelements';
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -116,7 +121,7 @@
     @apply border-border outline-ring/50 ;
   }
   body {
-    @apply bg-background text-foreground font-jersey15;
+    @apply bg-background text-foreground font-jersey15
   }
 }
 

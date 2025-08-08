@@ -13,14 +13,9 @@ export default function Home() {
         <p>React - Vite - Next - Electron - Node - Express</p>
       </div>
       <div className="flex items-center justify-center flex-col gap-5 p-5">
-        <p>
-          Sou desenvolvedor front-end com foco em interfaces modernas,
-          responsivas e acessíveis. Tenho experiência com projetos fullstack
-          usando React, Next, Electron e APIs com Node
-        </p>
-
         <p>Confira meus projetos abaixo!</p>
       </div>
+
       <Marquee
         className=" flex"
         autoFill
@@ -30,10 +25,14 @@ export default function Home() {
       >
         <img src={rule} />
       </Marquee>
+      <div className="w-full my-[2px] h-[1px] bg-primary/30">x</div>
       <Marquee autoFill pauseOnHover speed={20}>
         <div className="flex">
-        { projects.map(project => <ProjectCard key={project.id} project={project}/>)}
-        </div></Marquee>
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+      </Marquee>
     </div>
   );
 }
