@@ -1,55 +1,73 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, type HTMLAttributes } from "react";
 import { motion } from "framer-motion";
 
-interface TypingAnimationProps {
+interface TypingAnimationProps extends HTMLAttributes<HTMLDivElement> {
   text: string;
-  duration: number; // Duração total da animação
-  delay: number;
+  duration: number; // duração da animação por letra
+  delay: number; // delay entre letras
+  end?: boolean; // mostrar cursor piscando
+  start: number; // tempo em segundos para começar a animação
 }
 
-const TypingAnimation: React.FC<TypingAnimationProps> = ({
+export default function TypingAnimation({
   text,
   duration,
   delay,
-}) => {
-  const [words, setWords] = useState<string[] | null>(null);
-  const length = words?.length;
+  start,
+  end = false,
+  style,
+  ...props
+}: TypingAnimationProps) {
+  const [letters, setLetters] = useState<string[]>([]);
+  const [isStarted, setIsStarted] = useState(false);
 
   useEffect(() => {
-    // Divide o texto em palavras (preservando os espaços)
-    setWords(text.split(" "));
+    setLetters(text.split(""));
   }, [text]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsStarted(true);
+    }, start * 1000);
+
+    return () => clearTimeout(timer);
+  }, [start]);
+
   return (
-    <span className="text-primary">
-      {words?.map((word, index) => (
-        <motion.span
-          key={"letter-" + index}
-          initial={{ opacity: 0, x: 10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{
-            delay: (index + 1) * delay, // Atraso de cada palavra
-            duration: duration, // Duração da animação por palavra
-            ease: "easeInOut",
-          }}
-        >
-          {word + " "}
-        </motion.span>
-      ))}
+    <div {...props} style={{ whiteSpace: "pre-wrap", ...style }}>
+      <motion.div>
+        {letters.map((letter, index) => (
+          <motion.span
+            key={"letter-" + index}
+            initial={{ opacity: 0, x: 10 }}
+            animate={isStarted ? { opacity: 1, x: 0 } : { opacity: 0, x: 10 }}
+            transition={{
+              delay: isStarted ? (index + 1) * delay : 0,
+              duration,
+              ease: "easeInOut",
+            }}
+          >
+            {letter}
+          </motion.span>
+        ))}
 
-      {words && length && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            delay: length * delay,
-            duration: duration,
-          }}
-          className=" w-1 h-4 bg-primary animate-pulse animation-duration-[0.5s] translate-y-[3px] inline-block"
-        ></motion.div>
-      )}
-    </span>
+        {letters.length > 0 && end && isStarted && (
+          <>
+            {" "}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 1, 0] }}
+              transition={{
+                delay: letters.length * delay,
+                duration: 0.7,
+                repeat: Infinity,
+                repeatType: "loop",
+              }}
+              className="w-[2px] h-4 bg-primary animate-pulse animation-duration-[1s] translate-y-[3px] inline-block"
+            />
+          </>
+        )}
+      </motion.div>
+    </div>
   );
-};
-
-export default TypingAnimation;
+}
