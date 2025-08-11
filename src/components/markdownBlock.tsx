@@ -25,8 +25,8 @@ const MarkdownBlock: React.FC<MarkdownBlockProps> = ({ source }) => {
   }
 
   return (
-    <div>
-      <Markdown >{mdContent}</Markdown>
+    <div className="prose-base ">
+      <Markdown>{mdContent}</Markdown>
     </div>
   );
 };

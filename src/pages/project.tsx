@@ -5,7 +5,7 @@ import SidebarProject from "@/db/sidebarProject";
 import { useState } from "react";
 import { useParams } from "react-router";
 
-import sampleMd from "@/assets/markdown/README.md";
+import sampleMd from "@/assets/markdown/pleno.md";
 
 export default function Project() {
   const { projectId } = useParams();
@@ -28,7 +28,7 @@ export default function Project() {
       </div>
     );
   return (
-    <div className="w-full flex flex-1">
+    <div className="w-full flex flex-1 ">
       <SidebarProject project={current} />
       <div className="w-full flex-1 overflow-y-auto p-10 max-h-[calc(100vh-100px)] scrollbar scrollbar-thumb-primary scrollbar-track-background scrollbar-w-3">
         <MarkdownBlock source={sampleMd} />

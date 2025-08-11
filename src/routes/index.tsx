@@ -5,6 +5,8 @@ import ContentLayout from "./layouts/contentLayout";
 import Projects from "@/pages/projects";
 import Contact from "@/pages/contact";
 import Project from "@/pages/project";
+import Blog from "@/pages/blog";
+import BlogArticle from "@/pages/blogArticle";
 
 export default function GlobalRoutes() {
   return (
@@ -17,7 +19,8 @@ export default function GlobalRoutes() {
       <Route element={<ContentLayout />}>
         <Route path="/projects" element={<Projects />} />
         <Route path="/project/:projectId" element={<Project />} />
-        <Route path="/blog" element={<Projects />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:blogId" element={<BlogArticle />} />
       </Route>
     </Routes>
   );
