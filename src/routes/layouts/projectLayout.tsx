@@ -1,9 +1,10 @@
 import FooterBar from "@/routes/layouts/components/footerBar";
 import { Button } from "@/components/ui/button";
-import useGithub from "@/hooks/useGithub";
 import useProjects from "@/hooks/useProjects";
 import { Link, Outlet, useParams } from "react-router";
 import NavBar from "./components/navBar";
+import project from "@/pages/project";
+import TypingAnimation from "@/components/TypingAnimation";
 
 export default function ProjectLayout() {
   const { projectId } = useParams();
@@ -18,9 +19,7 @@ export default function ProjectLayout() {
         <NavBar />
       </div>
       <div className="flex flex-1">
-        <div className="w-[250px] border-r border-primary h-full">
-          <SidebarProject />
-        </div>
+        {projectId && <SidebarProject />}
         <div className="flex-1 overflow-auto">
           <Outlet />
         </div>
@@ -33,32 +32,91 @@ export default function ProjectLayout() {
 function SidebarProject() {
   const { projectId } = useParams();
   const { projects } = useProjects();
-  const { data, loading } = useGithub({ username: "KelvinCrepaldi" });
   const current = projects.filter((project) => project.id === projectId)[0];
 
-  if (projectId) return <div> {current.name} </div>;
-  if (loading) <div>Loading</div>;
+  return (
+    <div className="flex flex-col h-full w-[250px] border-r border-primary">
+      <div className="flex-1 border-r border-primary w-full flex flex-col p-2 items-center pb-5">
+        <div className="flex justify-between w-full">
+          <TypingAnimation
+            text={current.name}
+            delay={0.01}
+            duration={0.1}
+            start={0}
+          />
+          <TypingAnimation
+            text={current.type}
+            delay={0.01}
+            duration={0.1}
+            start={0.2}
+          />
+        </div>
+        <div className="w-full aspect-video bg-amber-950/20 group-hover:bg-background transition-all">
+          <img className="w-full aspect-video" src={current.img}></img>
+        </div>
 
-  return data ? (
-    <div className="flex flex-col">
-      <div className="p-5">
-        <div className="text-2xl">{data.name}</div>
-        <div>{data.bio}</div>
-        <div className="flex justify-between">
-          <div>followers: {data.followers}</div>
-          <div>following: {data.following}</div>
+        <div className="flex flex-col w-full">
+          {current.demo && (
+            <Button
+              asChild
+              className="bg-background text-primary hover:bg-primary hover:text-background flex justify-start"
+            >
+              <a href={current.demo} target="_blank" rel="noopener noreferrer">
+                Demo
+              </a>
+            </Button>
+          )}
+          {current.frontRepo && (
+            <Button
+              asChild
+              className="bg-background text-primary hover:bg-primary hover:text-background flex justify-start"
+            >
+              <a
+                href={current.frontRepo}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Front Repo
+              </a>
+            </Button>
+          )}
+          {current.apiRepo && (
+            <Button
+              asChild
+              className="bg-background text-primary hover:bg-primary hover:text-background flex justify-start"
+            >
+              <a
+                href={current.apiRepo}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                API Repo
+              </a>
+            </Button>
+          )}
+        </div>
+
+        <div className="w-full pt-2">
+          <TypingAnimation
+            text={current.description}
+            delay={0.01}
+            duration={0.1}
+            start={0.3}
+          />
+          <div className="flex gap-4 text-primary/70 mb-2 group-hover:text-background/70 transition-all">
+            <div className="flex  gap-5">
+              {current.techs.map((tech, index) => (
+                <TypingAnimation
+                  text={tech}
+                  delay={0.01}
+                  duration={0.1}
+                  start={0.9 + 0.4 * index}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-      <Link
-        to={"https://github.com/KelvinCrepaldi?tab=repositories"}
-        className=""
-      >
-        <Button className="w-full flex justify-start">
-          Github Public Repository
-        </Button>
-      </Link>
     </div>
-  ) : (
-    <></>
   );
 }

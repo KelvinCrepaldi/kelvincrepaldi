@@ -18,9 +18,12 @@ export default function Projects() {
         {projects.map((project) => (
           <div
             key={project.name}
-            className="flex border border-primary flex-1 w-[300px]"
+            className="flex border border-primary flex-1 w-[300px] rounded-[2px]"
           >
             <div className="flex flex-col flex-1">
+              <div className="p-2">
+                <img src={project.img} className="rounded-[2px]"></img>
+              </div>
               <div className="p-5 flex-1 flex flex-col">
                 <div className="flex items-center justify-between mb-2">
                   <div className="text-2xl">{project.name}</div>
