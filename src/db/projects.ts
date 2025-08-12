@@ -2,6 +2,8 @@ import img1 from "@/assets/img1.webp"
 import img2 from "@/assets/img2.webp"
 import img3 from "@/assets/img3.webp"
 
+import file1 from "@/assets/markdown/pleno.md"
+
 type stackTypes = "React" | "Next" | "Vite" | "Express" | "Electron";
 
 export type projectsTypes = {
@@ -14,11 +16,13 @@ export type projectsTypes = {
   apiRepo: string | null;
   img: string;
   type: "Front-End" | "Back-End" | "Full-Stack";
+  path: string;
+  file: string;
 };
 
 const projects: projectsTypes[] = [
   {
-    id: "1",
+    id: "742697fb-546e-4975-8781-a8e8d0b9078e",
     name: "Pirate's Punch",
     techs: ["Next", "Express", "React"],
     description:
@@ -28,9 +32,11 @@ const projects: projectsTypes[] = [
     apiRepo: "https://github.com/KelvinCrepaldi/piratespunchdrinks-api",
     frontRepo: "https://github.com/KelvinCrepaldi/piratespunchdrinks",
     type: "Full-Stack",
+    path: "/project/742697fb-546e-4975-8781-a8e8d0b9078e",
+    file: file1
   },
   {
-    id: "2",
+    id: "c14eee5b-2949-47c2-adb3-1a745d538ed3",
     name: "Education Demo",
     techs: ["Next", "Express", "React"],
     description:
@@ -40,9 +46,11 @@ const projects: projectsTypes[] = [
     apiRepo: null,
     frontRepo: "https://github.com/KelvinCrepaldi/educationdemo",
     type: "Front-End",
+    path: "/project/c14eee5b-2949-47c2-adb3-1a745d538ed3",
+    file: file1
   },
   {
-    id: "3",
+    id: "c6a99d39-67b4-47d5-ac00-4fbd69466e43",
     name: "Do.it",
     techs: ["Next", "Express", "React"],
     description:
@@ -52,6 +60,8 @@ const projects: projectsTypes[] = [
     apiRepo: null,
     frontRepo: "https://github.com/KelvinCrepaldi/doit-app",
     type: "Full-Stack",
+    path: "/project/c6a99d39-67b4-47d5-ac00-4fbd69466e43",
+    file: file1
   },
 ];
 

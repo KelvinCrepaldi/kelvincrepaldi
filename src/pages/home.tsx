@@ -1,13 +1,15 @@
 import Marquee from "react-fast-marquee";
 
 import ProjectCard from "@/components/projectCard";
-import projects from "@/db/projects";
 import RulerPointer from "@/components/roulerPointer";
 import TypingAnimation from "@/components/TypingAnimation";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import useProjects from "@/hooks/useProjects";
 
 export default function Home() {
+  const { projects } = useProjects(); 
+
   return (
     <div className="flex flex-col items-center justify-center w-full h-full text-center">
       <div className="flex flex-col flex-1 items-center justify-center">

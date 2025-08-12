@@ -7,7 +7,6 @@ export default function Blog() {
 
   return (
     <div className="w-full flex flex-1 ">
-      <div className="w-[250px] border-r border-primary h-full"></div>
       <div className="w-full flex-1 overflow-y-auto p-10 max-h-[calc(100vh-100px)] scrollbar scrollbar-thumb-primary scrollbar-track-background scrollbar-w-3 flex flex-col">
         {content.map((article) => (
           <Link

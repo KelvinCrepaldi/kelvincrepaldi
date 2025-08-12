@@ -1,7 +1,6 @@
 const pages = [
   { path: "/", label: "Home", backTo: "/"},
-  { path: "/projects", label: "Projects", backTo: "/" },
-  { path: "/contact", label: "Contact", backTo: "/" },
+  { path: "/project", label: "Projects", backTo: "/" },
   { path: "/blog", label: "Blog", backTo: "/" },
 ];
 
