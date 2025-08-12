@@ -1,7 +1,7 @@
-import FooterBar from "@/components/footerBar";
-import NavBar from "@/components/navBar";
+import FooterBar from "@/routes/layouts/components/footerBar";
 import { Button } from "@/components/ui/button";
 import { Link, Outlet, useLocation } from "react-router";
+import NavBar from "./components/navBar";
 
 export default function ContentLayout() {
   const location = useLocation().pathname;

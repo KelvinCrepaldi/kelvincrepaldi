@@ -1,9 +1,9 @@
-import FooterBar from "@/components/footerBar";
-import NavBar from "@/components/navBar";
+import FooterBar from "@/routes/layouts/components/footerBar";
 import { Button } from "@/components/ui/button";
 import useGithub from "@/hooks/useGithub";
 import useProjects from "@/hooks/useProjects";
 import { Link, Outlet, useParams } from "react-router";
+import NavBar from "./components/navBar";
 
 export default function ProjectLayout() {
   const { projectId } = useParams();
@@ -33,7 +33,7 @@ export default function ProjectLayout() {
 function SidebarProject() {
   const { projectId } = useParams();
   const { projects } = useProjects();
-  const { data, loading, error } = useGithub({ username: "KelvinCrepaldi" });
+  const { data, loading } = useGithub({ username: "KelvinCrepaldi" });
   const current = projects.filter((project) => project.id === projectId)[0];
 
   if (projectId) return <div> {current.name} </div>;
@@ -41,7 +41,6 @@ function SidebarProject() {
 
   return data ? (
     <div className="flex flex-col">
-     
       <div className="p-5">
         <div className="text-2xl">{data.name}</div>
         <div>{data.bio}</div>

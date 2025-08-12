@@ -1,33 +1,79 @@
-import ProjectCard from "@/components/projectCard";
+import { Button } from "@/components/ui/button";
 import projects from "@/db/projects";
 import { Link } from "react-router";
 
 export default function Projects() {
   return (
-    <div className="flex flex-col flex-1 max-h-[calc(100vh-90px)] overflow-auto gap-2 p-1 ">
-      {projects.map((project) => (
-        <Link to={project.path}>
-          {" "}
-          <div className=" flex group">
-            <img src={project.img} className="w-[300px] aspect-video border-4 border-primary" />
-
-            <div className="w-full group-hover:bg-primary">
-              <div className="w-full bg-primary text-background group-hover:text-primary group-hover:bg-background group-hover:border-t border-primary  p-2">
-                <h1 className="text-start leading-5">{project.name}</h1>
-              </div>
-
-              <div className=" p-2 flex gap-4 text-primary/70 mb-2 group-hover:text-background/70 transition-all ">
-                <div className="flex  gap-5">
-                  {project.techs.map((tech) => (
-                    <div className="m-0">{tech}</div>
-                  ))}
+    <section className="flex flex-col gap-10 py-10 justify-center items-center flex-1 max-h-[calc(100vh-90px)] overflow-auto p-1">
+      <div className="max-w-[950px] w-full">
+        <h1 className="text-4xl">Projects</h1>
+        <p className="text-xl">
+          Aqui você encontra alguns dos projetos que desenvolvi para praticar,
+          explorar novas tecnologias e testar ideias.
+          <br /> Cada projeto é fruto de aprendizado contínuo, seja no
+          front-end, back-end ou integração entre ambos.
+        </p>
+      </div>
+      <div className="max-w-[950px] w-full flex gap-2">
+        {projects.map((project) => (
+          <div
+            key={project.name}
+            className="flex border border-primary flex-1 w-[300px]"
+          >
+            <div className="flex flex-col flex-1">
+              <div className="p-5 flex-1 flex flex-col">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-2xl">{project.name}</div>
+                  <div className="text-primary/60">{project.type}</div>
                 </div>
+
+                <div>{project.description}</div>
               </div>
-              <p className=" p-2 text-start leading-5 group-hover:text-background">{project.description}</p>
+
+              <div className="flex bg-primary w-full">
+                {project.file && (
+                  <Button asChild>
+                    <Link to={project.path}>Article</Link>
+                  </Button>
+                )}
+                {project.demo && (
+                  <Button asChild>
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Demo
+                    </a>
+                  </Button>
+                )}
+                {project.frontRepo && (
+                  <Button asChild>
+                    <a
+                      href={project.frontRepo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Front Repo
+                    </a>
+                  </Button>
+                )}
+                {project.apiRepo && (
+                  <Button asChild>
+                    <a
+                      href={project.apiRepo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      API Repo
+                    </a>
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
-        </Link>
-      ))}
-    </div>
+        ))}
+      </div>
+    </section>
   );
 }

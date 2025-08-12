@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router";
-import { Button } from "./ui/button";
 import pages from "@/routes/pages";
+import { Button } from "@/components/ui/button";
 
 export default function NavBar() {
   const route = useLocation().pathname;

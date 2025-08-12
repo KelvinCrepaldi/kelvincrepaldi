@@ -1,24 +1,23 @@
-import file1 from "@/assets/markdown/pleno.md";
-import file2 from "@/assets/markdown/README.md";
+import welcome from "@/assets/markdown/welcome.md";
+import hook from "@/assets/markdown/hook.md"
 
 export default function useBlog() {
   const content = [
-    {
-      id: "94dee757-11bc-4c85-ae82-6147a6e0d784",
-      title:
-        "Plano Prático de Estudos para Evoluir de Júnior a Pleno em Front-end",
-      file: file1,
-      date: "11/08/2025",
-      path: `/blog/94dee757-11bc-4c85-ae82-6147a6e0d784`,
-      },
-
       {
-      id: "d76b27c8-5cac-42af-bf60-f2f751b96781",
+      id: "3e23b997-85ec-42c7-87a0-803972eebba9",
       title:
-        "Sobre esse site!",
-      file: file2,
-      date: "11/08/2025",
-      path: `/blog/d76b27c8-5cac-42af-bf60-f2f751b96781`,
+        "Welcome!",
+      file: welcome,
+      date: "12/08/2025",
+      path: `/blog/3e23b997-85ec-42c7-87a0-803972eebba9`,
+    },
+    {
+      id: "07e73365-585d-4cba-a4b8-220a0d667694",
+      title:
+        "React Hooks",
+      file: hook,
+      date: "12/08/2025",
+      path: `/blog/07e73365-585d-4cba-a4b8-220a0d667694`,
       },
   ];
 

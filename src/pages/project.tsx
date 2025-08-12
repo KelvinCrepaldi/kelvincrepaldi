@@ -2,8 +2,6 @@ import MarkdownBlock from "@/components/markdownBlock";
 import projects from "@/db/projects";
 import { useParams } from "react-router";
 
-import sampleMd from "@/assets/markdown/pleno.md";
-
 export default function Project() {
   const { projectId } = useParams();
   const current = projects.filter((project) => project.id === projectId)[0];
