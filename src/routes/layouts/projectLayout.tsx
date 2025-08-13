@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/button";
 import useProjects from "@/hooks/useProjects";
 import { Link, Outlet, useParams } from "react-router";
 import NavBar from "./components/navBar";
-import project from "@/pages/project";
-import TypingAnimation from "@/components/TypingAnimation";
 
 export default function ProjectLayout() {
   const { projectId } = useParams();
@@ -32,91 +30,91 @@ export default function ProjectLayout() {
 function SidebarProject() {
   const { projectId } = useParams();
   const { projects } = useProjects();
-  const current = projects.filter((project) => project.id === projectId)[0];
+  const current = projects.find((project) => project.id === projectId);
+
+  if (!current) return null;
 
   return (
-    <div className="flex flex-col h-full w-[250px] border-r border-primary">
-      <div className="flex-1 border-r border-primary w-full flex flex-col p-2 items-center pb-5">
-        <div className="flex justify-between w-full">
-          <TypingAnimation
-            text={current.name}
-            delay={0.01}
-            duration={0.1}
-            start={0}
-          />
-          <TypingAnimation
-            text={current.type}
-            delay={0.01}
-            duration={0.1}
-            start={0.2}
-          />
+    <div className="flex flex-col h-full w-[250px] border-r border-primary max-h-[calc(100vh-80px)] overflow-auto scrollbar scrollbar-thumb-primary scrollbar-track-background scrollbar-w-[2px] p-4 bg-background text-primary">
+      {/* Header */}
+      <div className="flex flex-col items-center mb-4">
+        <img
+          className="w-full aspect-video mb-2"
+          src={current.img}
+          alt={current.name}
+        />
+        <div className="flex justify-between w-full text-lg font-bold">
+          <span>{current.name}</span>
+          <span className="text-primary/70">{current.year}</span>
         </div>
-        <div className="w-full aspect-video bg-amber-950/20 group-hover:bg-background transition-all">
-          <img className="w-full aspect-video" src={current.img}></img>
-        </div>
-
-        <div className="flex flex-col w-full">
-          {current.demo && (
-            <Button
-              asChild
-              className="bg-background text-primary hover:bg-primary hover:text-background flex justify-start"
-            >
-              <a href={current.demo} target="_blank" rel="noopener noreferrer">
-                Demo
-              </a>
-            </Button>
-          )}
-          {current.frontRepo && (
-            <Button
-              asChild
-              className="bg-background text-primary hover:bg-primary hover:text-background flex justify-start"
-            >
-              <a
-                href={current.frontRepo}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Front Repo
-              </a>
-            </Button>
-          )}
-          {current.apiRepo && (
-            <Button
-              asChild
-              className="bg-background text-primary hover:bg-primary hover:text-background flex justify-start"
-            >
-              <a
-                href={current.apiRepo}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                API Repo
-              </a>
-            </Button>
-          )}
-        </div>
-
-        <div className="w-full pt-2">
-          <TypingAnimation
-            text={current.description}
-            delay={0.01}
-            duration={0.1}
-            start={0.3}
-          />
-          <div className="flex gap-4 text-primary/70 mb-2 group-hover:text-background/70 transition-all">
-            <div className="flex  gap-5">
-              {current.techs.map((tech, index) => (
-                <TypingAnimation
-                  text={tech}
-                  delay={0.01}
-                  duration={0.1}
-                  start={0.9 + 0.4 * index}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+        <p className=" mt-2 text-primary/70 text-center">
+          {current.description}
+        </p>
       </div>
+      <hr className="border-primary/30 my-2" />
+      {/* Contexto */}
+      <div className="mb-4 space-y-1 ">
+        <div>
+          <strong>Contexto:</strong> {current.context}
+        </div>
+        <div>
+          <strong>Categoria:</strong> {current.category}
+        </div>
+        <div>
+          <strong>Status:</strong> {current.status}
+        </div>
+        {current.private && (
+          <div className="text-red-700  mt-1">
+            Repositório Privado - Desenvolvido para uma empresa
+          </div>
+        )}
+      </div>
+      <hr className="border-primary/30 my-2" />
+      {/* Links */}
+      <div className="flex flex-col gap-2 mb-4">
+        {current.links?.demo && (
+          <Button
+            asChild
+            className="bg-primary text-background hover:bg-primary/80"
+          >
+            <a
+              href={current.links.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Demo
+            </a>
+          </Button>
+        )}
+        {current.links?.front && (
+          <Button
+            asChild
+            className="bg-background text-primary border border-primary hover:bg-primary hover:text-background"
+          >
+            <a
+              href={current.links.front}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Front Repo
+            </a>
+          </Button>
+        )}
+        {current.links?.api && (
+          <Button
+            asChild
+            className="bg-background text-primary border border-primary hover:bg-primary hover:text-background"
+          >
+            <a
+              href={current.links.api}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              API Repo
+            </a>
+          </Button>
+        )}
+      </div>{" "}
     </div>
   );
 }

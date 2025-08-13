@@ -4,21 +4,21 @@ import { Link } from "react-router";
 
 export default function Projects() {
   return (
-    <section className="flex flex-col gap-10 py-10 justify-center items-center flex-1 max-h-[calc(100vh-90px)] overflow-auto p-1">
+    <section className="flex flex-col gap-10 py-10 justify-center items-center flex-1  overflow-auto p-1">
       <div className="max-w-[950px] w-full">
         <h1 className="text-4xl">Projects</h1>
         <p className="text-xl">
-          Aqui você encontra alguns dos projetos que desenvolvi para praticar,
-          explorar novas tecnologias e testar ideias.
+          Aqui você encontra alguns dos projetos que desenvolvi de trabalhos,
+          para praticar, explorar novas tecnologias e testar ideias.
           <br /> Cada projeto é fruto de aprendizado contínuo, seja no
           front-end, back-end ou integração entre ambos.
         </p>
       </div>
-      <div className="max-w-[950px] w-full flex gap-2">
+      <div className="flex flex-col gap-4 flex-wrap max-w-[900px]">
         {projects.map((project) => (
           <div
             key={project.name}
-            className="flex border border-primary flex-1 w-[300px] rounded-[2px]"
+            className="flex border border-primary flex-1 rounded-[2px] w-full max-w-[700px]"
           >
             <div className="flex flex-col flex-1">
               <div className="p-2">
@@ -26,23 +26,25 @@ export default function Projects() {
               </div>
               <div className="p-5 flex-1 flex flex-col">
                 <div className="flex items-center justify-between mb-2">
-                  <div className="text-2xl">{project.name}</div>
-                  <div className="text-primary/60">{project.type}</div>
+                  <div className="text-2xl">{project.name} </div>
+                  <div className="text-primary/60">
+                    {project.role} - {project.year}
+                  </div>
                 </div>
 
                 <div>{project.description}</div>
               </div>
 
               <div className="flex bg-primary w-full">
-                {project.file && (
+                {project.path && (
                   <Button asChild>
                     <Link to={project.path}>Article</Link>
                   </Button>
                 )}
-                {project.demo && (
+                {project.links?.demo && (
                   <Button asChild>
                     <a
-                      href={project.demo}
+                      href={project.links?.demo}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -50,10 +52,10 @@ export default function Projects() {
                     </a>
                   </Button>
                 )}
-                {project.frontRepo && (
+                {project.links?.front && (
                   <Button asChild>
                     <a
-                      href={project.frontRepo}
+                      href={project.links?.front}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -61,10 +63,10 @@ export default function Projects() {
                     </a>
                   </Button>
                 )}
-                {project.apiRepo && (
+                {project.links?.api && (
                   <Button asChild>
                     <a
-                      href={project.apiRepo}
+                      href={project.links?.api}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
