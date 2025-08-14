@@ -5,17 +5,27 @@ import useProjects from "@/hooks/useProjects";
 import { useState } from "react";
 import Marquee from "react-fast-marquee";
 import ProjectCard from "@/components/projectCard";
-import RulerPointer from "@/components/roulerPointer";
+import RulerPointer from "@/components/rulerPointer";
 
 export default function Layout() {
   const { projectId } = useParams();
-  const active = !!!projectId;
+  const active = !projectId;
   return (
     <div className="flex flex-col justify-between h-screen">
       <NavBar />
       <div className="flex flex-col justify-center w-full h-full text-center relative overflow-hidden">
-        <Outlet />
-        <RulerPointer/>
+        {active ? (
+          <Outlet />
+        ) : (
+          <>
+            <div className="absolute   top-0 left-0 w-full h-[calc(100vh-116px)] overflow-x-hidden overflow-y-auto">
+              <Outlet />
+            </div>
+            <div className="h-full w-full"></div>
+          </>
+        )}
+        {active && <RulerPointer />}
+
         <ProjectsSlider active={active} />
       </div>
       <FooterBar />
@@ -25,17 +35,19 @@ export default function Layout() {
 const ProjectsSlider = ({ active = true }: { active?: boolean }) => {
   const { projects } = useProjects();
   const [play, setPlay] = useState(true);
-  const [disabledHoverIds, setDisabledHoverIds] = useState<Set<string>>(new Set());
+  const [disabledHoverIds, setDisabledHoverIds] = useState<Set<string>>(
+    new Set()
+  );
 
   const handleClick = (id: string) => {
-    setDisabledHoverIds((prev) => new Set(prev).add(id)); // desativa hover para este card
+    setDisabledHoverIds((prev) => new Set(prev).add(id));
   };
 
   const handleMouseEnter = (id: string) => {
     setPlay(false);
     setDisabledHoverIds((prev) => {
       const newSet = new Set(prev);
-      newSet.delete(id); // reativa hover ao entrar de novo
+      newSet.delete(id);
       return newSet;
     });
   };
@@ -44,6 +56,7 @@ const ProjectsSlider = ({ active = true }: { active?: boolean }) => {
     setPlay(true);
   };
 
+  // modificar comportamento do Marquee para conseguir sair fora do componente
   return (
     <Marquee
       className={`[&>div]:overflow-visible !overflow-visible transition-all ${

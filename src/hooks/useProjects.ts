@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 
 export default function useProjects() {
     const { projectId } = useParams();
-    const current = projects.filter((project) => project.id === projectId)[0];
+    const current = projects.find((project) => project.id === projectId);
  
     return {projects, current}
 }
