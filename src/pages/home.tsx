@@ -1,8 +1,11 @@
 import TypingAnimation from "@/components/TypingAnimation";
+import { ChevronDown } from "lucide-react";
+import {motion} from "framer-motion"
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center mb-[40px]">
+    <>
+      <div className="flex flex-col flex-1 items-center justify-center mb-[40px]">
         <TypingAnimation
           delay={0.02}
           duration={0.1}
@@ -27,6 +30,15 @@ export default function Home() {
           end
         ></TypingAnimation>
       </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, delay: 2.3 }}
+        className="flex items-center justify-center flex-col"
+      >
+        <p>Confira meus projetos abaixo!</p>
+        <ChevronDown className="animate-bounce animation-duration-[2s]" />
+      </motion.div>
+    </>
   );
 }
-
