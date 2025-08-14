@@ -3,7 +3,6 @@ import Marquee from "react-fast-marquee";
 export default function FooterBar() {
   return (
     <div className="w-full h-[40px] bg-primary">
-      <div className="w-full my-[2px] h-[1px] bg-background/20">x</div>
       <Marquee
         className=" flex"
         autoFill

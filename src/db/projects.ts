@@ -33,7 +33,7 @@ export type projectsTypes = {
   status: "Concluído" | "Em andamento" | "Manutenção";
   img: string;
   images?: string[];
-  path?: string;
+  path: string;
   file?: string;
   private: boolean;
   links?: projectLink;
@@ -53,7 +53,7 @@ const projects: projectsTypes[] = [
     status: "Concluído",
     img: ecoslogo,
     images: [ecoslogo, ecosimg],
-    path: "/project/f63694e0-353c-42e9-b27c-9d9c0ffaf572",
+    path: "/f63694e0-353c-42e9-b27c-9d9c0ffaf572",
     file: ecosmd,
     private: true,
   },
@@ -70,7 +70,7 @@ const projects: projectsTypes[] = [
     status: "Concluído",
     img: adamDigitalImg,
     images: [adamDigitalImg, adamDigital1, adamDigital2, adamDigital3, adamDigital4, adamDigital5],
-    path: "/project/e70d5cc2-95ae-43e5-a4de-1bd8a418bff0",
+    path: "/e70d5cc2-95ae-43e5-a4de-1bd8a418bff0",
     file: adamDigitalMd,
     private: true,
     links: {
@@ -91,7 +91,7 @@ const projects: projectsTypes[] = [
     status: "Concluído",
     img: piratesPunch,
     images: [piratesPunch],
-    path: "/project/a0b54a2f-2dc3-48f5-bf9b-410e1d9ff596",
+    path: "/a0b54a2f-2dc3-48f5-bf9b-410e1d9ff596",
     file: piratesPunchMd,
     private: false,
     links: {

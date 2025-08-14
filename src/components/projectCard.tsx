@@ -1,16 +1,17 @@
 import type { projectsTypes } from "@/db/projects";
 import { Link } from "react-router";
 
-export default function ProjectCard({ project }: { project: projectsTypes }) {
+export default function ProjectCard({ project, ...props }: { project: projectsTypes }) {
+  if(!project) return null
   return (
     <Link
-      to={`/project/${project.id}`}
-      className="w-[300px] flex flex-col items-center justify-center group"
+      to={project.path}
+      className="w-[300px] flex flex-col items-center justify-center group" {...props}
     >
       <div className="bg-primary w-full text-background h-[40px] flex justify-between items-center px-2 border-r border-t border-t-primary border-background group-hover:bg-background group-hover:text-primary group-hover:border-primary group-hover:border-t transition-all">
         <div>{project.name}</div> <div>{project.year}</div>
       </div>
-      <div className="flex-1 border-r border-primary w-full flex flex-col p-2 items-center pb-5 group-hover:bg-primary transition-all group-hover:text-background">
+      <div className=" border-r border-primary w-full  flex h-[260px] flex-col p-2 items-center pb-5 group-hover:bg-primary transition-all group-hover:text-background">
         <div className="w-full aspect-video bg-amber-950/20 group-hover:bg-background transition-all">
           <img className="w-full aspect-video" src={project.img}></img>
         </div>
