@@ -69,7 +69,13 @@ export default function Project() {
           <div className="flex flex-col gap-2 w-full mt-5">
             {links?.demo && (
               <Button asChild>
-                <Link to={links?.demo}>Demo</Link>
+                <Link
+                  to={links?.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Demo
+                </Link>
               </Button>
             )}
             {project.private ? (
@@ -78,12 +84,24 @@ export default function Project() {
               <>
                 {links?.front && (
                   <Button asChild>
-                    <Link to={links?.front}>Front-End Github Repo</Link>
+                    <Link
+                      to={links?.front}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Front-End Github Repo
+                    </Link>
                   </Button>
                 )}
                 {links?.api && (
                   <Button asChild>
-                    <Link to={links?.api}>Back-End Github Repo</Link>
+                    <Link
+                      to={links?.api}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Back-End Github Repo
+                    </Link>
                   </Button>
                 )}
               </>
