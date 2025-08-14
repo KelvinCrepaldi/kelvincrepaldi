@@ -22,34 +22,57 @@ export default function Layout() {
     </div>
   );
 }
-
 const ProjectsSlider = ({ active = true }: { active?: boolean }) => {
   const { projects } = useProjects();
   const [play, setPlay] = useState(true);
+  const [disabledHoverIds, setDisabledHoverIds] = useState<Set<string>>(new Set());
+
+  const handleClick = (id: string) => {
+    setDisabledHoverIds((prev) => new Set(prev).add(id)); // desativa hover para este card
+  };
+
+  const handleMouseEnter = (id: string) => {
+    setPlay(false);
+    setDisabledHoverIds((prev) => {
+      const newSet = new Set(prev);
+      newSet.delete(id); // reativa hover ao entrar de novo
+      return newSet;
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setPlay(true);
+  };
 
   return (
-      <Marquee
-        className={`[&>div]:overflow-visible !overflow-visible transition-all ${
-          active
-            ? "relative "
-            : "absolute -bottom-0 translate-y-[calc(100%-40px)]"
-        }`}
-        autoFill
-        play={play}
-      >
-        <div className="flex relative overflow-visible">
-          {projects.map((project) => (
-            <div
-              className={`relative    transition-all flex-1 ${
-                active ? "" : "hover:-translate-y-[calc(100%-40px)]"
-              }`}
-              onMouseEnter={() => setPlay(false)}
-              onMouseLeave={() => setPlay(true)}
-            >
-              <ProjectCard key={project.id} project={project} />
-            </div>
-          ))}
-        </div>
-      </Marquee>
+    <Marquee
+      className={`[&>div]:overflow-visible !overflow-visible transition-all ${
+        active
+          ? "relative "
+          : "absolute -bottom-0 translate-y-[calc(100%-40px)]"
+      }`}
+      autoFill
+      play={play}
+      speed={20}
+    >
+      <div className="flex relative overflow-visible">
+        {projects.map((project) => (
+          <div
+            key={project.id}
+            className={`relative transition-all flex-1 ${
+              active
+                ? ""
+                : !disabledHoverIds.has(project.id) &&
+                  "hover:-translate-y-[calc(100%-40px)]"
+            }`}
+            onClick={() => handleClick(project.id)}
+            onMouseEnter={() => handleMouseEnter(project.id)}
+            onMouseLeave={handleMouseLeave}
+          >
+            <ProjectCard project={project} />
+          </div>
+        ))}
+      </div>
+    </Marquee>
   );
 };
