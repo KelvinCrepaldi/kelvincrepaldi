@@ -14,15 +14,15 @@ export default function ProjectCard({
   return (
     <Link
       to={project.path}
-      className={`w-[300px] flex flex-col items-center justify-center group border border-primary ${
-        active ? "border-transparent" : ""
+      className={`w-[300px] flex flex-col items-center justify-center group border border-background  ${
+        current?.id ? "border-background" : "border-primary"
       }`}
       {...props}
     >
       {/* Top bar */}
       <div
         className={`w-full h-[40px] flex justify-between items-center px-2 transition-all group-hover:bg-background group-hover:text-primary ${
-          active ? "text-primary bg-transparent" : "text-background bg-primary"
+          active ? "text-primary bg-background" : "text-background bg-primary"
         }`}
       >
         <div>{project.name}</div>
@@ -30,7 +30,7 @@ export default function ProjectCard({
       </div>
 
       {/* Content */}
-      <div className="w-full h-[260px] flex flex-col items-center p-2 pb-5 transition-all group-hover:bg-primary group-hover:text-background">
+      <div className="w-full h-[260px] flex flex-col items-center p-2 pb-5 transition-all bg-background group-hover:bg-primary group-hover:text-background">
         {/* Image */}
         <div className="w-full aspect-video bg-amber-950/20 transition-all group-hover:bg-background">
           <img

@@ -1,6 +1,6 @@
 import TypingAnimation from "@/components/TypingAnimation";
 import { ChevronDown } from "lucide-react";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
@@ -30,6 +30,7 @@ export default function Home() {
           end
         ></TypingAnimation>
       </div>
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

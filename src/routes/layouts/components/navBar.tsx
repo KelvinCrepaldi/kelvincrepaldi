@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useParams } from "react-router";
 import pages from "@/routes/pages";
 import { Button } from "@/components/ui/button";
 import useProjects from "@/hooks/useProjects";
@@ -9,12 +9,18 @@ export default function NavBar() {
   const { current } = useProjects();
   const location = useLocation();
   const [title, setTitle] = useState("");
+  const { projectId } = useParams();
+  const active = !projectId;
 
   useEffect(() => {
     setTitle(current?.name || "");
   }, [current]);
   return (
-    <div className="w-full flex h-[40px] items-center justify-between px-4 bg-primary">
+    <div
+      className={`w-full flex h-[40px] items-center justify-between px-4 bg-primary ${
+        !active && "border-b border-background"
+      }`}
+    >
       <div className="text-background flex items-center m-4">
         {title && (
           <TypingAnimation

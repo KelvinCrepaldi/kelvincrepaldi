@@ -1,3 +1,5 @@
+import { Border } from "@/components/border";
+import TypingAnimation from "@/components/TypingAnimation";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -7,6 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import useProjects from "@/hooks/useProjects";
+import { motion } from "framer-motion";
 import { Link } from "react-router";
 
 export default function Project() {
@@ -25,50 +28,166 @@ export default function Project() {
     features,
     links,
   } = project;
+
+  let base = 0;
+
+  const next = (step = 0.1) => {
+    base += step;
+    return base;
+  };
+
   return (
-    <article className="flex flex-col items-center justify-center p-2 gap-10 lg:p-10 ">
-      <div className="flex flex-col lg:flex-row flex-1 lg:items-center lg:justify-center w-full h-full gap-5 text-primary mb-20 lg:mb-0">
-        <div className="flex items-start flex-col gap-2 w-full lg:w-1/4 p-5 bg-white/20">
+    <article
+      key={project.name}
+      className="flex flex-col items-center justify-center p-2 gap-10 lg:p-10 h-full "
+    >
+      <div className="flex flex-col lg:flex-row flex-1 lg:items-center lg:justify-center gap-5 text-background mb-20 lg:mb-0">
+        <div
+          key={`info-${project.name}`}
+          className="flex items-start justify-center flex-col gap-2 w-full h-full lg:w-1/4 p-5"
+        >
+          {/* Nome e ano */}
           <div className="text-xl flex justify-between w-full">
-            <div>{name}</div> <div className="text-primary/70">{year}</div>
+            <TypingAnimation
+              key={`name-${project.name}`}
+              delay={0.05}
+              duration={0.1}
+              start={next()}
+              text={name}
+            />
+            <TypingAnimation
+              key={`year-${project.name}`}
+              delay={0.05}
+              duration={0.1}
+              start={next()}
+              text={year.toString()}
+              className="text-background/70"
+            />
           </div>
-          <div className="flex flex-wrap gap-2 text-primary/70">
-            {techs.map((tech) => (
-              <div className="border px-2 text-sm rounded bg-primary/70 text-white">
-                {tech}
-              </div>
+
+          {/* Techs */}
+          <div
+            key={`techbox-${project.name}-x`}
+            className="flex flex-wrap gap-2 text-background/70"
+          >
+            {techs.map((tech, index) => (
+              <motion.div
+                key={`techbox-${project.name}-${index}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: [0, 1, 0, 1] }}
+                transition={{ delay: index + 1, startTime: 1 }}
+                className="border px-2 text-sm rounded bg-primary/70 text-white"
+              >
+                <TypingAnimation
+                  key={`tech-${tech}-${project.name}`}
+                  delay={0.05}
+                  duration={0.1}
+                  start={next()}
+                  text={tech}
+                />
+              </motion.div>
             ))}
           </div>
-          <div className="text-start leading-5">{description}</div>
 
+          {/* Descrição */}
+          <TypingAnimation
+            key={`desc-${project.name}`}
+            delay={0.05}
+            duration={0.1}
+            start={next()}
+            text={description}
+            className="text-start leading-5"
+          />
+
+          {/* Tecnologias */}
           <div className="leading-4">
-            <div className="">Tecnologias:</div>
-            <div className="text-start leading-5 text-primary/70">{techs}</div>
+            <TypingAnimation
+              key={`tech-title-${project.name}`}
+              delay={0.05}
+              duration={0.1}
+              start={next()}
+              text="Tecnologias:"
+              className="text-start"
+            />
+            <TypingAnimation
+              key={`tech-main-${project.name}`}
+              delay={0.05}
+              duration={0.1}
+              start={next()}
+              text={techs[0]}
+              className="text-start leading-5 text-background/70"
+            />
           </div>
 
+          {/* Categoria */}
           <div className="leading-4">
-            <div className="text-start">Tipo:</div>
-            <div className="text-start leading-5 text-primary/70">
-              {category}
-            </div>
+            <TypingAnimation
+              key={`type-title-${project.name}`}
+              delay={0.05}
+              duration={0.1}
+              start={next()}
+              text="Tipo:"
+              className="text-start"
+            />
+            <TypingAnimation
+              key={`type-${project.name}`}
+              delay={0.05}
+              duration={0.1}
+              start={next()}
+              text={category}
+              className="text-start leading-5 text-background/70"
+            />
           </div>
 
+          {/* Foco / Role */}
           <div className="leading-4">
-            <div className="text-start">Foco:</div>
-            <div className="text-start leading-5 text-primary/70">{role}</div>
+            <TypingAnimation
+              key={`role-title-${project.name}`}
+              delay={0.05}
+              duration={0.1}
+              start={next()}
+              text="Foco:"
+              className="text-start"
+            />
+            <TypingAnimation
+              key={`role-${project.name}`}
+              delay={0.05}
+              duration={0.1}
+              start={next()}
+              text={role}
+              className="text-start leading-5 text-background/70"
+            />
           </div>
 
+          {/* Funcionalidades */}
           <div className="leading-4">
-            <div className="text-start">Funcionalidades:</div>
+            <TypingAnimation
+              key={`features-title-${project.name}`}
+              delay={0.05}
+              duration={0.1}
+              start={next()}
+              text="Funcionalidades:"
+              className="text-start"
+            />
             <ul className="list-disc list-inside text-start">
-              {features.map((feature) => (
-                <li className="text-primary/70">{feature}</li>
+              {features.map((feature, index) => (
+                <li key={`feature-${index}-${project.name}`}>
+                  <TypingAnimation
+                    delay={0.05}
+                    duration={0.1}
+                    start={next()}
+                    text={feature}
+                    className="text-background/70"
+                  />
+                </li>
               ))}
             </ul>
           </div>
+
+          {/* Links */}
           <div className="flex flex-col gap-2 w-full mt-5">
             {links?.demo && (
-              <Button asChild>
+              <Button key={`demo-${project.name}`} asChild>
                 <Link
                   to={links?.demo}
                   target="_blank"
@@ -79,11 +198,18 @@ export default function Project() {
               </Button>
             )}
             {project.private ? (
-              <div className="text-red-800">"Repositórios github privados"</div>
+              <TypingAnimation
+                key={`private-${project.name}`}
+                delay={0.05}
+                duration={0.1}
+                start={next()}
+                text="Repositórios github privados"
+                className="text-red-800"
+              />
             ) : (
               <>
                 {links?.front && (
-                  <Button asChild>
+                  <Button key={`front-${project.name}`} asChild>
                     <Link
                       to={links?.front}
                       target="_blank"
@@ -94,7 +220,7 @@ export default function Project() {
                   </Button>
                 )}
                 {links?.api && (
-                  <Button asChild>
+                  <Button key={`api-${project.name}`} asChild>
                     <Link
                       to={links?.api}
                       target="_blank"
@@ -109,13 +235,19 @@ export default function Project() {
           </div>
         </div>
 
-        <div className="flex items-center justify-center flex-1 w-full">
+        {/* Imagem / Carrossel */}
+        <div
+          key={`carousel-${project.name}`}
+          className="flex items-center justify-center flex-1 w-full"
+        >
           <Carousel className="w-[calc(100%-100px)]">
             <div className="border-8 border-primary bg-primary">
               <CarouselContent>
                 {Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={index}>
-                    <img src={img} />
+                  <CarouselItem key={`carousel-item-${index}-${project.name}`}>
+                    <Border key={`border-${index}-${project.name}`}>
+                      <img src={img} />
+                    </Border>
                   </CarouselItem>
                 ))}
               </CarouselContent>

@@ -6,12 +6,13 @@ import { useState } from "react";
 import Marquee from "react-fast-marquee";
 import ProjectCard from "@/components/projectCard";
 import RulerPointer from "@/components/rulerPointer";
+import { motion } from "framer-motion";
 
 export default function Layout() {
   const { projectId } = useParams();
   const active = !projectId;
   return (
-    <div className="flex flex-col justify-between h-screen">
+    <div className="flex flex-col justify-between h-screen ">
       <NavBar />
       <div className="flex flex-col justify-center w-full h-full text-center relative overflow-hidden">
         {active ? (
@@ -28,6 +29,17 @@ export default function Layout() {
 
         <ProjectsSlider active={active} />
       </div>
+      <motion.div
+        initial={{ x: "-100%" }}
+        animate={{
+          x: active ? "-100%" : "0%",
+        }}
+        transition={{
+          duration: 0.4,
+          ease: "easeInOut", // ou "easeInOut" se quiser mais suavidade
+        }}
+        className="absolute top-0 left-0 w-full h-full bg-primary -z-20"
+      />
       <FooterBar />
     </div>
   );
