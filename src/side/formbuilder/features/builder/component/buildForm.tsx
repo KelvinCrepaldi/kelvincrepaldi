@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import type { formTypes } from "../types";
+import useBuilder from "@/side/formbuilder/context/useBuilder";
+import type { formTypes } from "@/side/formbuilder/types";
 import BuildOption from "./buildOption";
-import useBuilder from "../context/useBuilder";
 
 export default function BuildForm({ form }: { form: formTypes }) {
   const { deleteForm, updateFormQuestion, createOption } = useBuilder();

@@ -1,5 +1,5 @@
-import useBuilder from "../context/useBuilder";
-import type { optionTypes } from "../types";
+import useBuilder from "@/side/formbuilder/context/useBuilder";
+import type { optionTypes } from "@/side/formbuilder/types";
 
 type BuildOptionProps = {
   option: optionTypes;

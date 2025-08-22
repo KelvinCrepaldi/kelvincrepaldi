@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type HTMLAttributes } from "react";
+import { useEffect, useState, type HTMLAttributes } from "react";
 import { motion } from "framer-motion";
 
 interface TypingAnimationProps extends HTMLAttributes<HTMLDivElement> {
@@ -10,52 +10,82 @@ interface TypingAnimationProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function TypingAnimation({
-  text,
-  duration,
+  text = "",
   delay,
   start,
   end = false,
   style,
   ...props
 }: TypingAnimationProps) {
+  const [visibleCount, setVisibleCount] = useState(0);
   const [isStarted, setIsStarted] = useState(false);
 
-  const letters = useMemo(() => text.split(""), [text]);
+  const letters = Array.from(text); // Corrige caracteres especiais
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsStarted(true);
-    }, start * 1000);
-
+    const timer = setTimeout(() => setIsStarted(true), start * 1000);
     return () => clearTimeout(timer);
   }, [start]);
 
-  return (
-    <div {...props} style={{ whiteSpace: "pre-wrap", ...style }}>
-      {letters.map((letter, index) => (
-        <motion.span
-          key={`letter-${index}`}
-          initial={{ opacity: 0, x: 10 }}
-          animate={isStarted ? { opacity: 1, x: 0 } : {}}
-          transition={{
-            delay: isStarted ? index * delay : 0,
-            duration,
-            ease: "easeInOut",
-          }}
-        >
-          {letter}
-        </motion.span>
-      ))}
+  useEffect(() => {
+    if (!isStarted || visibleCount >= letters.length) return;
 
-      {letters.length > 0 && end && isStarted && (
+    const interval = setInterval(() => {
+      setVisibleCount((prev) => {
+        const next = prev + 1;
+        if (next >= letters.length) clearInterval(interval);
+        return next;
+      });
+    }, delay * 1000);
+
+    return () => clearInterval(interval);
+  }, [isStarted, delay, letters.length, visibleCount]);
+
+  const visibleText = letters.slice(0, visibleCount).join("");
+
+  return (
+    <div
+      {...props}
+      style={{
+        position: "relative",
+        whiteSpace: "pre-wrap",
+        fontFamily: "monospace", // opcional, dá mais consistência visual
+        ...style,
+      }}
+    >
+      {/* Ocupa espaço sem aparecer */}
+      <span
+        aria-hidden="true"
+        style={{
+          visibility: "hidden",
+          color: "transparent",
+          userSelect: "none",
+          pointerEvents: "none",
+        }}
+      >
+        {text}
+      </span>
+
+      {/* Texto digitando visível */}
+      <motion.span
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}
+      >
+        {visibleText}
+      </motion.span>
+
+      {/* Cursor */}
+      {end && visibleText.length === letters.length && (
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 0] }}
-          transition={{
-            delay: letters.length * delay,
-            duration: 0.7,
-            repeat: Infinity,
-          }}
+          transition={{ duration: 0.7, repeat: Infinity }}
           className="w-[2px] h-4 bg-primary inline-block align-middle ml-1"
         />
       )}
