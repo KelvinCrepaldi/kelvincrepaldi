@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import Marquee from "react-fast-marquee";
-import rule from "@/assets/rule.svg";
-export default function RulerPointer() {
+import ruleNormal from "@/assets/rule.svg";
+import ruleMiddle from "@/assets/ruleMid.svg";
+
+export default function RulerPointer({
+  rule = "normal",
+}: {
+  rule?: "normal" | "middle";
+}) {
   const [x, setX] = useState(0);
 
   useEffect(() => {
@@ -14,7 +20,7 @@ export default function RulerPointer() {
   }, []);
 
   return (
-    <div className="w-full overflow-hidden relative ">
+    <div className="w-full overflow-hidden relative h-13 ">
       <div className=" relative *:left-0 w-full max-w-screen pointer-events-none">
         {/* Seta e valor X */}
         <div className="relative flex items-center" style={{ left: x }}>
@@ -36,7 +42,7 @@ export default function RulerPointer() {
         speed={10}
         direction="right"
       >
-        <img src={rule} />
+        <img src={rule ? ruleNormal : ruleMiddle} />
       </Marquee>
     </div>
   );
