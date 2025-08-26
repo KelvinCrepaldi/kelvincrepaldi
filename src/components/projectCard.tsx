@@ -1,14 +1,13 @@
 import type { projectsTypes } from "@/db/projects";
 import { Button } from "./ui/button";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { SquareArrowOutUpRight } from "lucide-react";
 
 export default function ProjectCard({ project }: { project: projectsTypes }) {
+  const navigate = useNavigate();
   return (
-    <Link
-      to={project.links?.demo || ""}
-      target="_blank"
-      rel="noopener noreferrer"
+    <button
+      onClick={() => navigate(project.path)}
       className="rounded-xl p-6 flex-1 border border-transparent  group
       [background:linear-gradient(#3D3834,#3D3834)_padding-box,linear-gradient(130deg,#DED5C5,#3D3834,#DED5C5)_border-box] 
       hover:[background:linear-gradient(#3D3834,#3D3834)_padding-box,linear-gradient(90deg,#DED5C5,#DED5C5,#DED5C5)_border-box]"
@@ -60,6 +59,6 @@ export default function ProjectCard({ project }: { project: projectsTypes }) {
           </Button>
         )}
       </div>
-    </Link>
+    </button>
   );
 }

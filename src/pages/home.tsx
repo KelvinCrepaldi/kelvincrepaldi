@@ -15,12 +15,13 @@ import downloadCurriculum from "@/assets/curriculum/CV_Kelvin-Crepaldi.pdf";
 
 export default function Home() {
   const { social } = useSocial();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <section className="flex flex-col items-center" id="section-home">
+    <section className="flex flex-col items-center">
       <div className="flex flex-col flex-1 items-center justify-center min-h-[60vh] max-w-5xl w-full">
         <TypingAnimation
           delay={0.02}
