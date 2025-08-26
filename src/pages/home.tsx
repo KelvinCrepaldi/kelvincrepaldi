@@ -47,15 +47,22 @@ export default function Home() {
         ></TypingAnimation>
 
         <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 2, delay: 2.3 }} className="flex gap-1 pt-3">
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, delay: 2.3 }}
+          className="flex gap-1 pt-3"
+        >
           {social.map((e) => (
             <Tooltip>
               <TooltipTrigger>
-                <div className="flex justify-center items-center border p-1 rounded border-primary hover:text-background hover:bg-primary m-1">
+                <a
+                  href={e.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex justify-center items-center border p-1 rounded border-primary hover:text-background hover:bg-primary m-1"
+                >
                   {e.icon}
-                </div>
+                </a>
               </TooltipTrigger>
               <TooltipContent>
                 <p>{e.label}</p>
