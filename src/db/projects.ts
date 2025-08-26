@@ -16,7 +16,7 @@ import piratesPunch from "@/assets/projects/piratespunch/thumb.png";
 type stackTypes = "React" | "Next" | "Vite" | "Express" | "Electron" | "PWA";
 
 export type projectLink = {
-  demo?: string;
+  demo: string;
   front?: string;
   api?: string;
 };

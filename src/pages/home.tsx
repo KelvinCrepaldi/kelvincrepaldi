@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 import Projects from "@/components/Projects";
 import RulerPointer from "@/components/rulerPointer";
 import Timeline from "@/components/timeLine";
-import Marquee from "react-fast-marquee";
-import RuleMiddle from "@/assets/ruleMid.svg";
 import Divide from "@/components/divide";
 
 export default function Home() {
