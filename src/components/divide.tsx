@@ -9,7 +9,7 @@ export default function Divide() {
         autoFill
         pauseOnHover
         speed={10}
-        direction="right"
+        direction="left"
         gradient
         gradientColor="oklch(0.3445 0.0098 61.17)"
       >

@@ -9,12 +9,16 @@ export default function ProjectCard({ project }: { project: projectsTypes }) {
       to={project.links?.demo || ""}
       target="_blank"
       rel="noopener noreferrer"
-      className="rounded-xl p-6 flex-1 border border-transparent
+      className="rounded-xl p-6 flex-1 border border-transparent  group
       [background:linear-gradient(#3D3834,#3D3834)_padding-box,linear-gradient(130deg,#DED5C5,#3D3834,#DED5C5)_border-box] 
       hover:[background:linear-gradient(#3D3834,#3D3834)_padding-box,linear-gradient(90deg,#DED5C5,#DED5C5,#DED5C5)_border-box]"
     >
       <div className="flex justify-between text-background/30">
-        <p>2022</p> <SquareArrowOutUpRight size={20} />
+        <p>2022</p>{" "}
+        <SquareArrowOutUpRight
+          size={20}
+          className="group-hover:animate-pulse group-hover:text-background"
+        />
       </div>
       <h1 className="text-xl mb-2 text-background">{project.name}</h1>
       <p className="text-background/40">{project.description}</p>

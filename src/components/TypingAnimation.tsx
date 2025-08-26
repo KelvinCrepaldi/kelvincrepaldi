@@ -49,7 +49,6 @@ export default function TypingAnimation({
       style={{
         position: "relative",
         whiteSpace: "pre-wrap",
-        fontFamily: "monospace", // opcional, dá mais consistência visual
         ...style,
       }}
     >
