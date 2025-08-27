@@ -9,7 +9,7 @@ import { Download } from "lucide-react";
 import Marquee from "react-fast-marquee";
 import downloadCurriculum from "@/assets/curriculum/CV_Kelvin-Crepaldi.pdf";
 
-export default function FooterBar() {
+export default function Footer() {
   const { social } = useSocial();
   return (
     <div className="w-full bg-primary">

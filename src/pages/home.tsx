@@ -1,6 +1,6 @@
 import TypingAnimation from "@/components/TypingAnimation";
 import { motion } from "framer-motion";
-import Projects from "@/components/Projects";
+import ProjectsList from "@/components/projectsList";
 import RulerPointer from "@/components/rulerPointer";
 import Timeline from "@/components/timeLine";
 import Divide from "@/components/divide";
@@ -100,7 +100,7 @@ export default function Home() {
       </motion.div>
       <RulerPointer />
       <div className="flex flex-col gap-40 bg-primary">
-        <Projects />
+        <ProjectsList />
         <Divide />
         <Timeline />
         <div className="pb-40 flex items-center justify-center">

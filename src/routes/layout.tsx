@@ -1,6 +1,6 @@
-import FooterBar from "@/routes/layouts/components/footerBar";
+import Footer from "@/components/footer";
 import { Outlet } from "react-router";
-import NavBar from "./components/navBar";
+import NavBar from "@/components/navBar";
 import ScrollToTop from "@/components/scrollToTop";
 
 export default function Layout() {
@@ -9,7 +9,7 @@ export default function Layout() {
       <ScrollToTop />
       <NavBar />
       <Outlet />
-      <FooterBar />
+      <Footer />
     </div>
   );
 }
